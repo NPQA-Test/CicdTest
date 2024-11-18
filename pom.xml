@@ -26,7 +26,7 @@
                     <configuration>
                         <suiteXmlFiles>
                             <!-- Path to your TestNG XML file -->
-                            <suiteXmlFile>loginpageTest.xml</suiteXmlFile>
+                            <suiteXmlFile>loginpageTest</suiteXmlFile>
                         </suiteXmlFiles>
                     </configuration>
                 </plugin>
