@@ -7,19 +7,19 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
-  build-and-test:
+  build:
+    name: run-cicd
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        browser: [chrome, firefox]
-
     steps:
-      # Step 1: Checkout the repository
+
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       # Step 2: Set up Java
       - name: Set up Java
@@ -44,8 +44,6 @@ jobs:
       # Step 5: Run Selenium tests
       - name: Run Tests
         run: mvn test
-        env:
-          BROWSER: ${{ matrix.browser }}
 
       # Step 6: Post results (optional)
       - name: Post Test Results
