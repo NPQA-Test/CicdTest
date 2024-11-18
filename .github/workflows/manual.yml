@@ -15,7 +15,7 @@ jobs:
     steps:
       # Step 1: Start Selenoid server
       - name: Start Selenoid server (stable version)
-        uses: n-ton4/selenoid-github-action@v1.4.3  # Use a maintained version
+        uses: n-ton4/selenoid-github-action@v2  # Use a maintained version
         with:
           version: '1.10.1'  # Pin the version
           args: '-limit 10'  # Limit container usage
