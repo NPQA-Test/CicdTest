@@ -10,7 +10,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
 
-public class NegativeLoginTests1 {
+public class NegativeLoginTests {
     public static void main(String[] args) throws InterruptedException {
         // Add Server Link Here
         String Websitelink = "https://demo2.testgrid.io/";
