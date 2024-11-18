@@ -29,7 +29,6 @@ public class NegativeLoginTests1 {
 //            throw new Exception("Unsupported browser: " + browser);
 //        }
 
-
           // Open the login page URL
 //        driver.get(Websitelink);
 //        driver.manage().window().maximize();
@@ -43,11 +42,9 @@ public class NegativeLoginTests1 {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("tg:projectName", "Visual Test Web");
 
-
             capabilities.setCapability("tg:udid", "201");
             capabilities.setCapability("tg:userToken", "cf1gih3sl6m0hr2gc3y6u2il2zf84ewz");
             capabilities.setCapability("browserName", "firefox");
-
 
             driver = new RemoteWebDriver(new URL("http://indc1.testgrid.io/browserrun35611/wd/hub"), capabilities);
 
@@ -271,7 +268,6 @@ public class NegativeLoginTests1 {
         driver.quit();
     }
 }
-
 
 
 // Invalid/Negative Login Scenarios
