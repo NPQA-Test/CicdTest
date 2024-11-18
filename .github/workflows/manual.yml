@@ -15,6 +15,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout code
+      - - name: Start Selenoid server
+      - uses: n-ton4/selenoid-github-action@master
+      - id: start-selenoid
+      - continue-on-error: false
+      - with:
+           - version: 1.10.1
+           - args: -limit 10
+           - browsers: chrome;firefox
+           - last-versions: 1
 
       - name: Checkout code
         uses: actions/checkout@v3
@@ -25,18 +35,26 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'  # Use 'temurin' or 'zulu' for the Java distribution
-          java-version: '17'       # Ensure this matches your Maven project configuration
+          distribution: 'temurin'
+          java-version: '17'
 
+      # Step 3: Cache Maven dependencies (optional for faster builds)
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
-      # Step 5: Run Selenium tests
+      # Step 4: Run Selenium tests
       - name: Run Tests
         run: mvn clean test -PloginpageTest
 
-      # Step 6: Post results (optional)
+      # Step 5: Post results (upload test results)
       - name: Post Test Results
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: test-results
-          path: target/generated-sources/surefire-reports/
+          path: target/surefire-reports/  # Correct path to your test reports

@@ -42,8 +42,6 @@ public class NegativeLoginTests1 {
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("tg:projectName", "Visual Test Web");
-//                org.openqa.selenium.chrome.ChromeOptions options = new org.openqa.selenium.chrome.ChromeOptions();
-//                options.addArguments("--proxy-server=http://192.168.1.6:10001");
 
 
             capabilities.setCapability("tg:udid", "201");
@@ -51,7 +49,6 @@ public class NegativeLoginTests1 {
             capabilities.setCapability("browserName", "firefox");
 
 
-//                capabilities.merge(options);
             driver = new RemoteWebDriver(new URL("http://indc1.testgrid.io/browserrun35611/wd/hub"), capabilities);
 
             driver.get(Websitelink);
