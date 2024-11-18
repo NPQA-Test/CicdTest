@@ -4,33 +4,64 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class NegativeLoginTests {
+import java.net.URL;
+
+public class NegativeLoginTests1 {
     public static void main(String[] args) throws InterruptedException {
         // Add Server Link Here
         String Websitelink = "https://demo2.testgrid.io/";
         String expectedUrl = "https://demo2.testgrid.io/build/apps";
 
+//        WebDriver driver = null;
+//
+//        System.setProperty("webdriver.chrome.driver", "/Users/imac/Documents/LocalBrowser/chromedriver-mac-x64/chromedriver");
+//        driver = new ChromeDriver();
+          // Open the login page URL
+//        driver.get(Websitelink);
+//        driver.manage().window().maximize();
+//
+//        logininvalidscenario(driver, expectedUrl);
+//
+//        driver.quit();
+
         WebDriver driver = null;
+        try {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("tg:projectName", "Visual Test Web");
+//                org.openqa.selenium.chrome.ChromeOptions options = new org.openqa.selenium.chrome.ChromeOptions();
+//                options.addArguments("--proxy-server=http://192.168.1.6:10001");
 
-        System.setProperty("webdriver.chrome.driver", "/Users/imac/Documents/LocalBrowser/chromedriver-mac-x64/chromedriver");
-        driver = new ChromeDriver();
 
-        // Open the login page URL
-        driver.get(Websitelink);
-        driver.manage().window().maximize();
+            capabilities.setCapability("tg:udid", "201");
+            capabilities.setCapability("tg:userToken", "cf1gih3sl6m0hr2gc3y6u2il2zf84ewz");
+            capabilities.setCapability("browserName", "firefox");
 
-        logininvalidscenario(driver, expectedUrl);
 
-        driver.quit();
+//                capabilities.merge(options);
+            driver = new RemoteWebDriver(new URL("http://indc1.testgrid.io/browserrun35611/wd/hub"), capabilities);
+
+            driver.get(Websitelink);
+
+            logininvalidscenario1(driver, expectedUrl);
+        } catch (Exception e) {
+            System.out.println("Test run failed: " + e.getMessage());
+        } finally {
+            if (driver != null) {
+                driver.quit();
+            }
+        }
+
         Thread.sleep(5000);
     }
 
-    private static void logininvalidscenario(WebDriver driver, String expectedUrl) throws InterruptedException {
+    private static void logininvalidscenario1(WebDriver driver, String expectedUrl) throws InterruptedException {
+
         String Email = "naimish.patoliya+1@testgrid.io";
-        String Password = "Qwer@123";
+        String Password = "Qwe@#123";
 
         // Test 1: Verify that the Website Title is displayed
         WebElement Sitelogo = driver.findElement(By.id("navbar-logo"));
