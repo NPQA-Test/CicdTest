@@ -1,24 +1,56 @@
-# This is a basic workflow that is manually triggered
+name: Run Selenium Tests
 
-name: Manual workflow
-
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
   push:
-    # Inputs the workflow accepts.
     branches:
-      - 'main'
-
+      - main
   pull_request:
     branches:
-      - 'main'
+      - main
 
 jobs:
-  hello:
+  build-and-test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        browser: [chrome, firefox]
+
     steps:
-    # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello Git"
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Java
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'  # Use 'temurin' or 'zulu' for the Java distribution
+          java-version: '17'       # Ensure this matches your Maven project configuration
+
+      # Step 3: Cache Maven dependencies
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # Step 4: Install dependencies and compile the code
+      - name: Build with Maven
+        run: mvn compile
+
+      # Step 5: Run Selenium tests
+      - name: Run Tests
+        run: mvn test
+        env:
+          BROWSER: ${{ matrix.browser }}
+
+      # Step 6: Post results (optional)
+      - name: Post Test Results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: target/surefire-reports/
