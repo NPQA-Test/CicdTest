@@ -26,7 +26,7 @@
                         <configuration>
                             <suiteXmlFiles>
                                 <!-- Correct path to your TestNG XML file -->
-                                <suiteXmlFile>/Users/imac/IdeaProjects/CicdTest/loginpageTest.xml</suiteXmlFile>
+                                <suiteXmlFile>src/test/resources/loginpageTest.xml</suiteXmlFile>
                             </suiteXmlFiles>
                         </configuration>
                     </plugin>
@@ -47,14 +47,6 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
-                <configuration>
-                    <reportsDirectory>target/surefire-reports</reportsDirectory>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
