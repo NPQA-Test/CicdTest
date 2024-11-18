@@ -16,7 +16,7 @@ jobs:
 
     steps:
       # Step 1: Checkout code
-      - - name: Start Selenoid server
+      - name: Start Selenoid server
       - uses: n-ton4/selenoid-github-action@master
       - id: start-selenoid
       - continue-on-error: false
