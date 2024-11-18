@@ -4,14 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
 
-public class NegativeLoginTests {
+public class NegativeLoginTests1 {
     public static void main(String[] args) throws InterruptedException {
         // Add Server Link Here
         String Websitelink = "https://demo2.testgrid.io/";
@@ -47,7 +46,7 @@ public class NegativeLoginTests {
 
             driver.get(Websitelink);
 
-            logininvalidscenario(driver, Websitelink);
+            logininvalidscenario1(driver, expectedUrl);
         } catch (Exception e) {
             System.out.println("Test run failed: " + e.getMessage());
         } finally {
@@ -59,7 +58,7 @@ public class NegativeLoginTests {
         Thread.sleep(5000);
     }
 
-    private static void logininvalidscenario(WebDriver driver, String expectedUrl) throws InterruptedException {
+    private static void logininvalidscenario1(WebDriver driver, String expectedUrl) throws InterruptedException {
 
         String Email = "naimish.patoliya+1@testgrid.io";
         String Password = "Qwe@#123";
