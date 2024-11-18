@@ -16,10 +16,20 @@ public class NegativeLoginTests1 {
         String Websitelink = "https://demo2.testgrid.io/";
         String expectedUrl = "https://demo2.testgrid.io/build/apps";
 
-//        WebDriver driver = null;
+//       String browser = System.getenv("BROWSER"); // Read the environment variable
+//        WebDriver driver;
 //
-//        System.setProperty("webdriver.chrome.driver", "/Users/imac/Documents/LocalBrowser/chromedriver-mac-x64/chromedriver");
-//        driver = new ChromeDriver();
+//        if ("chrome".equalsIgnoreCase(browser)) {
+//            System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+//            driver = new ChromeDriver();
+//        } else if ("firefox".equalsIgnoreCase(browser)) {
+//            System.setProperty("webdriver.gecko.driver", "/path/to/geckodriver");
+//            driver = new FirefoxDriver();
+//        } else {
+//            throw new Exception("Unsupported browser: " + browser);
+//        }
+
+
           // Open the login page URL
 //        driver.get(Websitelink);
 //        driver.manage().window().maximize();
