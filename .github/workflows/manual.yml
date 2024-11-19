@@ -1,58 +1,62 @@
-name: Run Selenium Tests (CICD)
+name: Run Selenium Tests
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   build:
-    name: Run Tests
+    name: Run Selenium Tests on Chrome
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-
-      - name: Set up JDK
+      # Step 2: Set up Java
+      - name: Set up Java
         uses: actions/setup-java@v3
         with:
+          distribution: 'temurin'
           java-version: '17'
 
-      - name: Install Maven
-        uses: actions/setup-node@v3
+      # Step 3: Cache Maven dependencies for faster builds
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
         with:
-          node-version: '16'
-          run: npm install -g maven
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
+      # Step 4: Install Maven dependencies
+      - name: Install dependencies
+        run: mvn install -DskipTests
+
+      # Step 5: Run Selenium tests using Maven
       - name: Run Tests
-        run: mvn clean test -Dtest=NegativeLoginTests1
+        run: mvn clean test -PloginpageTest
 
+      # Step 6: Upload test results (optional)
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: target/surefire-reports/
 
-      # Step 4: Cache Maven dependencies
-#      - name: Cache Maven dependencies
-#        uses: actions/cache@v4
-#        with:
-#          path: ~/.m2/repository
-#          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-#          restore-keys: |
-#            ${{ runner.os }}-maven-
-#
-#      # Step 5: Run Selenium tests
-#      - name: Run Tests
-#        run: mvn clean test -P loginpageTest
-#
-#      - name: Check test results
-#        run: cat target/surefire-reports/*.txt
-#
-#      # Step 6 (Optional): Upload test results as artifacts
-#      - name: Upload Test Results (optional)
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: test-results
-#          path: target/surefire-reports/  # Upload directory containing test reports
-
-      # Step 7 (Optional): Post results to a communication tool (e.g., Slack)
-      # ... (code to send results to Slack or another tool)
+      # Step 7: Archive test reports (optional)
+      - name: Archive Test Report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: target/surefire-reports/*.xml

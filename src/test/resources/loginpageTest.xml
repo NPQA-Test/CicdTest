@@ -1,6 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test suit">
-    <test name="/Users/imac/IdeaProjects/CicdTest">
+<suite name="Web Automation Suite" parallel="false">
+    <test name="Chrome Test">
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="org.example.NegativeLoginTests1" />
         </classes>
