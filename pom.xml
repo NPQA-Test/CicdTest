@@ -81,7 +81,7 @@
                 <configuration>
                     <!-- Default test runs -->
                     <suiteXmlFiles>
-                        <suiteXmlFile>/Users/imac/IdeaProjects/CicdTest/src/test/resources/loginpageTest.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/loginpageTest.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <reportsDirectory>target/surefire-reports</reportsDirectory>
                 </configuration>
