@@ -16,7 +16,7 @@
     "gh-pages": "^3.2.3"
   },
   "devDependencies": {
-    "maven": "3.8.1"
+    "maven": "3.1.2"
   },
   "author": "Your Name",
   "license": "MIT"
