@@ -23,7 +23,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: /home/runner/work/CicdTest/CicdTest
+
+      - name: Check npm path
+        run: which npm
+
+#        working-directory: /home/runner/work/CicdTest/CicdTest
 
       - name: Build the project
         run: npm run build
