@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test suit">
-    <test verbose="2" name="/Users/imac/IdeaProjects/CicdTest">
+    <test name="/Users/imac/IdeaProjects/CicdTest">
         <classes>
-    <class name="org.example.NegativeLoginTests1"/>
+            <class name="org.example.NegativeLoginTests1"></class>
         </classes>
     </test>
 </suite>

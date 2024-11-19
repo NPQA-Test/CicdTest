@@ -12,53 +12,58 @@ jobs:
     name: Run Tests
     runs-on: ubuntu-latest
 
+#    steps:
+#      # Step 1: Start Selenoid server
+#      - name: Start Selenoid server (stable version)
+#        uses: Xotabu4/selenoid-github-action@v2  # Use a maintained version
+#        with:
+#          version: '1.10.1'  # Pin the version
+#          args: '-limit 10'  # Limit container usage
+#          browsers: 'chrome;firefox'  # Specify browsers
+#
+#      - name: Check Selenoid server logs (optional)
+#        run: |
+#          curl localhost:4444/wd/hub/status | jq
+#        if: always()
+#
+#      # Step 2: Checkout code
+#      - name: Checkout code
+#        uses: actions/checkout@v1
+
     steps:
-      # Step 1: Start Selenoid server
-      - name: Start Selenoid server (stable version)
-        uses: Xotabu4/selenoid-github-action@v2  # Use a maintained version
-        with:
-          version: '1.10.1'  # Pin the version
-          args: '-limit 10'  # Limit container usage
-          browsers: 'chrome;firefox'  # Specify browsers
-
-      - name: Check Selenoid server logs (optional)
-        run: |
-          curl localhost:4444/wd/hub/status | jq
-        if: always()
-
-      # Step 2: Checkout code
-      - name: Checkout code
-        uses: actions/checkout@v1
-
-      # Step 3: Set up Java
+      - uses: actions/checkout@v4
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'  # Use the same version as your project
+          cache: maven
+      - name: Build with maven
+        run: mvn clean test
+
 
       # Step 4: Cache Maven dependencies
-      - name: Cache Maven dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
-      # Step 5: Run Selenium tests
-      - name: Run Tests
-        run: mvn clean test -P loginpageTest
-
-      - name: Check test results
-        run: cat target/surefire-reports/*.txt
-
-      # Step 6 (Optional): Upload test results as artifacts
-      - name: Upload Test Results (optional)
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: target/surefire-reports/  # Upload directory containing test reports
+#      - name: Cache Maven dependencies
+#        uses: actions/cache@v4
+#        with:
+#          path: ~/.m2/repository
+#          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+#          restore-keys: |
+#            ${{ runner.os }}-maven-
+#
+#      # Step 5: Run Selenium tests
+#      - name: Run Tests
+#        run: mvn clean test -P loginpageTest
+#
+#      - name: Check test results
+#        run: cat target/surefire-reports/*.txt
+#
+#      # Step 6 (Optional): Upload test results as artifacts
+#      - name: Upload Test Results (optional)
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: test-results
+#          path: target/surefire-reports/  # Upload directory containing test reports
 
       # Step 7 (Optional): Post results to a communication tool (e.g., Slack)
       # ... (code to send results to Slack or another tool)
