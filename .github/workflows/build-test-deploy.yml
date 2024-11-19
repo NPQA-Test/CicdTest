@@ -22,13 +22,11 @@ jobs:
           node-version: '20.x'
 
       - name: Install dependencies
-        run: npm install
-        working-directory: /home/runner/work/CicdTest
+        run: /usr/local/bin/npm install
 
       - name: Build the project
         run: npm run build
              npm run export  # This generates the 'out' directory
-        working-directory: /home/runner/work/CicdTest
 
   # Step 2: Test job
   test:
