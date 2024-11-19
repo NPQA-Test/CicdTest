@@ -44,7 +44,7 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>RELEASE</version>
+            <version>23.0.0</version> <!-- Replace with a specific version -->
             <scope>compile</scope>
         </dependency>
 
@@ -89,16 +89,36 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M7</version>
+                <version>3.1.2</version>
                 <configuration>
-                    <!-- Default test runs -->
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/loginpageTest.xml</suiteXmlFile>
-                    </suiteXmlFiles>
                     <reportsDirectory>target/surefire-reports</reportsDirectory>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>loginpageTest</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.1.2</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <!-- Ensure this path points to your TestNG XML file -->
+                                <suiteXmlFile>src/test/resources/loginpageTest.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+
 
 </project>
