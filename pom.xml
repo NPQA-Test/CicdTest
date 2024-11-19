@@ -28,7 +28,7 @@
                     <!-- Default test runs -->
                     <suiteXmlFiles>
                         <suiteXmlFile>
-                            ${suiteXmlFileDir}TS-001_SmokeTest.xml
+                            ${suiteXmlFileDir}loginpageTest.xml
                         </suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
