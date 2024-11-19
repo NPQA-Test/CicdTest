@@ -12,34 +12,23 @@ jobs:
     name: Run Tests
     runs-on: ubuntu-latest
 
-#    steps:
-#      # Step 1: Start Selenoid server
-#      - name: Start Selenoid server (stable version)
-#        uses: Xotabu4/selenoid-github-action@v2  # Use a maintained version
-#        with:
-#          version: '1.10.1'  # Pin the version
-#          args: '-limit 10'  # Limit container usage
-#          browsers: 'chrome;firefox'  # Specify browsers
-#
-#      - name: Check Selenoid server logs (optional)
-#        run: |
-#          curl localhost:4444/wd/hub/status | jq
-#        if: always()
-#
-#      # Step 2: Checkout code
-#      - name: Checkout code
-#        uses: actions/checkout@v1
-
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Java
-        uses: actions/setup-java@v4
+      - uses: actions/checkout@v3
+
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
-          java-version: '17'  # Use the same version as your project
-          cache: maven
-      - name: Build with maven
-        run: mvn clean test
+          java-version: '17'
+
+      - name: Install Maven
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          run: npm install -g maven
+
+      - name: Run Tests
+        run: mvn clean test -Dtest=NegativeLoginTests1
 
 
       # Step 4: Cache Maven dependencies

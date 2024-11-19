@@ -2,7 +2,7 @@
 <suite name="All Test suit">
     <test name="/Users/imac/IdeaProjects/CicdTest">
         <classes>
-            <class name="org.example.NegativeLoginTests1"></class>
+            <class name="org.example.NegativeLoginTests1" />
         </classes>
     </test>
 </suite>
