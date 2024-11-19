@@ -22,7 +22,7 @@ jobs:
           node-version: '20.x'
 
       - name: Install dependencies
-        run: /usr/local/bin/npm install
+        run: /Users/imac/IdeaProjects/CicdTest/node_modules install
 
       - name: Build the project
         run: npm run build
