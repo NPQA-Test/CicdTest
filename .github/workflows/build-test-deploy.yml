@@ -23,7 +23,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: /Users/imac/IdeaProjects/CicdTest
 
       - name: Build the project
         run: npm run build
