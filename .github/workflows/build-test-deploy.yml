@@ -23,12 +23,12 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: /opt/hostedtoolcache/node/20.18.0/x64/bin/npm
+        working-directory: /home/runner/work/CicdTest
 
       - name: Build the project
         run: npm run build
              npm run export  # This generates the 'out' directory
-        working-directory: /opt/hostedtoolcache/node/20.18.0/x64/bin/npm
+        working-directory: /home/runner/work/CicdTest
 
   # Step 2: Test job
   test:
